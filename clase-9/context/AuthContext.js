@@ -3,6 +3,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const AuthContext = createContext()
 
+const url = 'https://666ae3b37013419182d1589d.mockapi.io/FreshTomatoes/';
+
 export const AuthProvider = ({ children }) => {
 
     const [status, setStatus] = useState('checking');
@@ -27,7 +29,7 @@ export const AuthProvider = ({ children }) => {
 
         try {
             
-            const respuesta = await fetch('https://6656578f9f970b3b36c51233.mockapi.io/api/v1/usuarios');
+            const respuesta = await fetch(`${url}users`);
             const users = await respuesta.json()
             console.log('users: ', users);
             
@@ -45,13 +47,13 @@ export const AuthProvider = ({ children }) => {
             console.error('Error en el fetch: ', error)
             alert('Error en login')
         }
-        // https://6656578f9f970b3b36c51233.mockapi.io/api/v1/usuarios
+     
     }
 
     const register = async (username, email, password) => {
 
         try {
-            const respuesta = await fetch('https://6656578f9f970b3b36c51233.mockapi.io/api/v1/usuarios',{
+            const respuesta = await fetch(`${url}users`,{
                 method: 'POST',
                 headers: {
                     'Content-Type':'application/json',
