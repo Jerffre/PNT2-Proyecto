@@ -1,10 +1,11 @@
 import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
 
-export const MovieCard = ({title, price, image}) => {
+export const MovieCard = ({title, overview, image}) => {
 
-    // console.log(title);
+    //console.log(overview);
     const tituloAcortado = title.length > 30 ? title.substring(0, 30) + '...' : title
+    const overviewAcortado = overview.length > 50 ? overview.substring(0, 50) + '...' : overview
     
   return (
     <View style={ styles.card}>
@@ -14,11 +15,10 @@ export const MovieCard = ({title, price, image}) => {
             source={{ uri: image}}
         />
         <Text style={styles.title}>{tituloAcortado}</Text>
-        <Text style={styles.price}>${price}</Text>
+        <Text style={styles.overview}>${overviewAcortado}</Text>
     </View>
   )
 }
-
 
 const styles = StyleSheet.create({
     image:{
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold'
     },
-    price:{
+    overview:{
         fontSize: 16,
         color: 'green',
         marginBottom: 5

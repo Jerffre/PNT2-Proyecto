@@ -4,25 +4,7 @@ import { AuthContext } from '../context/AuthContext'
 import { MovieContext } from '../context/MovieContext'
 import { MovieCard } from '../components/MovieCard'
 
-export const HomeScreen = ({navigation}) => {
-
-   const { logout } = useContext(AuthContext)
-    
-    const { moviesPremiere, fetchMoviesPremiere } = useContext(MovieContext)
-    const [refreshing, setRefreshing] = React.useState(false);
-
-    const onRefresh = async () => {
-         setRefreshing(true);
-        await fetchMoviesPremiere()
-        setRefreshing(false)
-    };
-   
-
-    //  useEffect(() => {
-    //    fetch('https://fakestoreapi.com/products')
-    //      .then(response => response.json())
-    //     .then( data => setProductos(data))
-    //  }, [])
+export const MoviesFavoritesScreen = ({navigation}) => {          
 
     const renderItem = ({ item }) => (
         <TouchableOpacity 
@@ -48,14 +30,9 @@ export const HomeScreen = ({navigation}) => {
             keyExtractor={ item => item.id.toString()}
             contentContainerStyle={ styles.flatListContainer}
             numColumns={2}
-            refreshControl={
-                <RefreshControl 
-                    refreshing={refreshing}
-                    onRefresh={onRefresh}
-                />
-            }
+            
         />
-        <Button title="Logout" onPress={ () => logout()} color="red" />
+        
     </View>
   )
 }
