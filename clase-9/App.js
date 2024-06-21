@@ -11,6 +11,7 @@ import { MovieDetailScreen } from './screens/MovieDetailScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Navbar } from './components/Navbar';
 import { MoviesFavoritesScreen } from './screens/MoviesFavoritesScreen';
+import { SideTab } from './components/SideTab';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -18,6 +19,7 @@ const Tab = createBottomTabNavigator();
 function AppTabs() { 
   return ( 
   <Tab.Navigator> 
+    <Tab.Screen name="SideTab" component={SideTab} /> 
     <Tab.Screen name="HomeScreen" component={HomeScreen} /> 
     <Tab.Screen name="MovieFavorites" component={MoviesFavoritesScreen} /> 
   </Tab.Navigator> ); 
@@ -44,10 +46,10 @@ function AppNavigator(){
           
         ) : 
         (
-                     
-          <Stack.Screen name="HomeTabs" component={AppTabs} options={{ headerShown: false }} />            
-          
-
+          <>
+            <Stack.Screen name="HomeTabs" component={AppTabs} options={{ headerShown: false }} />            
+            <Stack.Screen name="MovieDetail" component={MovieDetailScreen}></Stack.Screen>
+          </>
         )
       }
 
