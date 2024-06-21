@@ -4,7 +4,9 @@ import { AuthContext } from '../context/AuthContext'
 import { MovieContext } from '../context/MovieContext'
 import { MovieCard } from '../components/MovieCard'
 
-export const MoviesFavoritesScreen = ({navigation}) => {          
+export const MoviesFavoritesScreen = ({navigation}) => {      
+    
+    const { moviesPremiere, fetchMoviesPremiere } = useContext(MovieContext)
 
     const renderItem = ({ item }) => (
         <TouchableOpacity 

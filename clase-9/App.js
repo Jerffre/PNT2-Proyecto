@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import RegisterLoginScreen from './screens/RegisterLoginScreen';
@@ -11,26 +11,39 @@ import { MovieDetailScreen } from './screens/MovieDetailScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Navbar } from './components/Navbar';
 import { MoviesFavoritesScreen } from './screens/MoviesFavoritesScreen';
-import { SideTab } from './components/SideTab';
+import AboutUsScreen from './screens/AboutUsScreen';
+import HelpScreen from './screens/HelpScreen';
+import ProfileScreen from './screens/ProfileScreen';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
-function AppTabs() { 
-  return ( 
-  <Tab.Navigator> 
-    <Tab.Screen name="SideTab" component={SideTab} /> 
-    <Tab.Screen name="HomeScreen" component={HomeScreen} /> 
-    <Tab.Screen name="MovieFavorites" component={MoviesFavoritesScreen} /> 
-  </Tab.Navigator> ); 
+// function AppTabs() { 
+//   return ( 
+//   <Tab.Navigator> 
+//     <Tab.Screen name="SideTab" component={SideTab} options={{ headerShown: false }} /> 
+//     <Tab.Screen name="HomeScreen" component={HomeScreen} /> 
+//     <Tab.Screen name="MovieFavorites" component={MoviesFavoritesScreen} /> 
+//   </Tab.Navigator> ); 
+// }
+
+function SideTab() {
+  return (
+    <Drawer.Navigator>
+        <Drawer.Screen name="HomeScreen" component={HomeScreen} />
+        <Drawer.Screen name="MovieFavorites" component={MoviesFavoritesScreen} />
+        <Drawer.Screen name="Perfil" component={ProfileScreen} />
+        <Drawer.Screen name="Help" component={HelpScreen} /> 
+        <Drawer.Screen name="AboutUs" component={AboutUsScreen} />
+    </Drawer.Navigator>
+  )
 }
 
 
 function AppNavigator(){
   const { status } = useContext(AuthContext)
-
   // if( status === 'checking') return ()
-
   return (
     <Stack.Navigator
       screenOptions={{
@@ -46,10 +59,11 @@ function AppNavigator(){
           
         ) : 
         (
-          <>
-            <Stack.Screen name="HomeTabs" component={AppTabs} options={{ headerShown: false }} />            
-            <Stack.Screen name="MovieDetail" component={MovieDetailScreen}></Stack.Screen>
-          </>
+          <Stack.Group>
+            <Stack.Screen name="SideTab" component={SideTab} options={{ headerShown: false }} />            
+            <Stack.Screen name="MovieDetail" component={MovieDetailScreen}/>
+          </Stack.Group>
+          
         )
       }
 
@@ -74,18 +88,4 @@ export default function App() {
 
 
 
-// export default function App() {
-//   return (
-//     <ProductProvider>
-//     <NavigationContainer>
-//       <Stack.Navigator initialRouteName='Home'>
-//         <Stack.Screen name="RegisterLogin" component={RegisterLoginScreen} />
-//         <Stack.Screen name="Home" component={HomeScreen}/>
-//         <Stack.Screen name="AddProducto" component={AddProductScreen} />
-//         <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
-//       </Stack.Navigator>
-//     </NavigationContainer>
-//     </ProductProvider>
-//   );
-// }
 
