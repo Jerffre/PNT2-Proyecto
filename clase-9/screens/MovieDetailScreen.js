@@ -1,65 +1,65 @@
-import React, { useContext, useState } from 'react'
-import { Button, Image, StyleSheet, Text, View } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
-
+import React from 'react';
+import { Image, StyleSheet, Text, View, ScrollView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 export const MovieDetailScreen = ({ route }) => {
 
     const movie = route.params.movie;
     
-    const navigation = useNavigation()
+    const navigation = useNavigation();
 
-  return (
-    <View style={ styles.container}>
-        <Image 
-            style={ styles.image}
-            resizeMode='contain'
-            source={{uri:'https://image.tmdb.org/t/p/w500/'+movie.backdrop_path}}
-        />
-        <Text style={ styles.title}>{movie.title}</Text>
-        <Text style={ styles.description}>{movie.description}</Text>       
-        <Text style={ styles.category}>{movie.category}</Text>               
+    console.log(movie)
 
-    </View>
-  )
-}
+    return (
+        <ScrollView contentContainerStyle={styles.container}>
+            <Image 
+                style={styles.image}
+                resizeMode='contain'
+                source={{ uri: 'https://image.tmdb.org/t/p/w500/' + movie.backdrop_path }}
+            />
+            <Text style={styles.title}>{movie.title}</Text>
+            
+            <Text style={[styles.description, styles.justifiedText]}>{movie.overview}</Text>
+
+            <Text style={styles.label}>Original Language:</Text>
+            <Text style={[styles.description, styles.justifiedText]}>{movie.original_language}</Text>        
+            
+            <Text style={styles.label}>Release Date:</Text>
+            <Text style={styles.description}>{movie.release_date}</Text>       
+            
+            <Text style={styles.label}>Vote Average:</Text>
+            <Text style={styles.description}>{movie.vote_average}</Text>               
+        </ScrollView>
+    );
+};
 
 const styles = StyleSheet.create({
-    container:{
-        flex: 1,
+    container: {
+        flexGrow: 1,
         padding: 20,
-        justifyContent: 'center'
+        justifyContent: 'flex-start'
     },
-    image:{
+    image: {
         width: '100%',
         height: 200,
-        marginBottom: 10
+        marginBottom: 20        
     },
-    title:{
-        fontSize: 24,
+    title: {
+        fontSize: 40,
         fontWeight: 'bold',
         marginBottom: 10,
+        textAlign: 'center'
     },
-    description:{
+    label: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginTop: 10
+    },
+    description: {
         fontSize: 16,
-        marginBottom: 20,
+        marginBottom: 10,
     },
-    category:{
-        fontSize: 12,
-        marginBottom: 20,
-    },
-    price:{
-        fontSize: 18,
-        color: 'green',
-        marginBottom: 20
-    },
-    counterContainer:{
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 20
-    },
-    cantidad:{
-        fontSize: 18,
-        marginHorizontal: 20
+    justifiedText: {
+        textAlign: 'justify'
     }
-})
+});

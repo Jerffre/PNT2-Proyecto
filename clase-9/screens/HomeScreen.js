@@ -1,63 +1,69 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Button, FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View, RefreshControl } from 'react-native'
-import { AuthContext } from '../context/AuthContext'
-import { MovieContext } from '../context/MovieContext'
-import { MovieCard } from '../components/MovieCard'
+import React, { useContext, useEffect, useState } from 'react';
+import { Button, FlatList, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View, RefreshControl } from 'react-native';
+import { AuthContext } from '../context/AuthContext';
+import { MovieContext } from '../context/MovieContext';
+import { MovieCard } from '../components/MovieCard';
 
-export const HomeScreen = ({navigation}) => {
+export const HomeScreen = ({ navigation }) => {
 
-   const { logout } = useContext(AuthContext)
-    
-    const { moviesPremiere, fetchMoviesPremiere } = useContext(MovieContext)
-    const [refreshing, setRefreshing] = React.useState(false);
+    const { logout } = useContext(AuthContext);
+    const { moviesPremiere, fetchMoviesPremiere } = useContext(MovieContext);
+    const [refreshing, setRefreshing] = useState(false);
+    const [searchText, setSearchText] = useState('');
+    const [filteredMovies, setFilteredMovies] = useState(moviesPremiere);
+
+    useEffect(() => {
+        setFilteredMovies(
+            moviesPremiere.filter(movie =>
+                movie.title.toLowerCase().includes(searchText.toLowerCase())
+            )
+        );
+    }, [searchText, moviesPremiere]);
 
     const onRefresh = async () => {
-         setRefreshing(true);
-        await fetchMoviesPremiere()
-        setRefreshing(false)
+        setRefreshing(true);
+        await fetchMoviesPremiere();
+        setRefreshing(false);
     };
-   
-
-    //  useEffect(() => {
-    //    fetch('https://fakestoreapi.com/products')
-    //      .then(response => response.json())
-    //     .then( data => setProductos(data))
-    //  }, [])
 
     const renderItem = ({ item }) => (
-        <TouchableOpacity 
-        style={styles.touchable}
-        key={item.id}
-        onPress={() => navigation.navigate('MovieDetail', { movie: item})}
+        <TouchableOpacity
+            style={styles.touchable}
+            key={item.id}
+            onPress={() => navigation.navigate('MovieDetail', { movie: item })}
         >
-        <MovieCard 
-            title={item.title}
-            overview={item.overview}
-            image={'https://image.tmdb.org/t/p/w500/'+item.backdrop_path}            
+            <MovieCard
+                title={item.title}
+                overview={item.overview}
+                image={'https://image.tmdb.org/t/p/w500/' + item.backdrop_path}
             />
         </TouchableOpacity>
-    )
-    
-  return (
-    <View style={styles.container}>
-        
-        
-        <FlatList
-            data={moviesPremiere}
-            renderItem={ renderItem }
-            keyExtractor={ item => item.id.toString()}
-            contentContainerStyle={ styles.flatListContainer}
-            numColumns={2}
-            refreshControl={
-                <RefreshControl 
-                    refreshing={refreshing}
-                    onRefresh={onRefresh}
-                />
-            }
-        />
-    </View>
-  )
-}
+    );
+
+    return (
+        <View style={styles.container}>
+            <TextInput
+                style={styles.searchBar}
+                placeholder="Search for a movie..."
+                value={searchText}
+                onChangeText={setSearchText}
+            />
+            <FlatList
+                data={filteredMovies}
+                renderItem={renderItem}
+                keyExtractor={item => item.id.toString()}
+                contentContainerStyle={styles.flatListContainer}
+                numColumns={2}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={refreshing}
+                        onRefresh={onRefresh}
+                    />
+                }
+            />
+        </View>
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -65,21 +71,29 @@ const styles = StyleSheet.create({
         padding: 10,
         justifyContent: 'center'
     },
-    carrito:{
+    searchBar: {
+        height: 40,
+        borderColor: 'gray',
+        borderWidth: 1,
+        borderRadius: 5,
+        paddingHorizontal: 10,
+        marginBottom: 10
+    },
+    carrito: {
         fontSize: 24,
         fontWeight: 'bold',
         marginVertical: 20,
         textAlign: 'center'
     },
-    scrollContainer:{
+    scrollContainer: {
         alignItems: 'center'
     },
-    flatListContainer:{
+    flatListContainer: {
         justifyContent: 'center'
     },
-    touchable:{
+    touchable: {
         flex: 1,
         margin: 10,
         maxWidth: '45%'
     }
-})
+});
