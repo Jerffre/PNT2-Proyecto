@@ -35,21 +35,23 @@ const styles = StyleSheet.create({
     },
     title:{
         fontSize: 18,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginBottom: 10,
     },
     overview:{
         fontSize: 16,
-        color: 'green',
+        color: 'black',
         marginBottom: 5
     },
     card:{
         borderWidth: 1,
-        bordercolor: '#ddd',
+        bordercolor: 'red',
         borderRadius: 5,
         padding: 10,
         marginBottom: 10,
-        backgroundColor: '#fff',
-        width: "80%",
-        height: 400
+        backgroundColor: '#F0F0F0',
+        width: "96%",
+        alignItems: 'center',
+
     }
 })

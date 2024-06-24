@@ -25,7 +25,7 @@ export const MoviesFavoritesScreen = ({navigation}) => {
             overview={item.overview}
             image={'https://image.tmdb.org/t/p/w500/'+item.backdrop_path}            
             />
-        <Button title="Quitar de la lista" onPress = {() => deleteFavoritos2(item.id)} color="red" /> 
+        <Button title="♥ quitar favorito" onPress = {() => deleteFavoritos2(item.id)} color="red" /> 
         </TouchableOpacity>
 
         </>
@@ -36,7 +36,7 @@ export const MoviesFavoritesScreen = ({navigation}) => {
                 {favorites.length === 0 ? 
         <View>
 
-        <Text>No tenes ninguna pelicula en la lista </Text>
+        <Text style={styles.texto}>Tu lista de favoritos se encuentra vacia </Text>
         </View>
          
          :
@@ -57,7 +57,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 10,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignItems:'center'
     },
     carrito:{
         fontSize: 24,
@@ -74,5 +75,10 @@ const styles = StyleSheet.create({
     touchable:{
         flex: 1,
         margin: 10,
+    },
+    texto: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: 'red',
     }
 })

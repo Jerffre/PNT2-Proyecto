@@ -43,20 +43,21 @@ export const HomeScreen = ({ navigation }) => {
                 image={'https://image.tmdb.org/t/p/w500/' + item.backdrop_path}
                 item={item}
             />
-         <Button title="Add favorites" onPress = {() => addFavoritos2(item)} color="red" />   
+         <Button title='♥ agregar favorito' onPress = {() => addFavoritos2(item)} color="red" />   
         </TouchableOpacity>
         </>
     );
 
     return (
-        <View style={styles.container}>
+        <>
             <TextInput
                 style={styles.searchBar}
                 placeholder="Search for a movie..."
                 value={searchText}
                 onChangeText={setSearchText}
             />
-            <FlatList
+        <View style={styles.container}>
+            <FlatList 
                 data={filteredMovies}
                 renderItem={renderItem}
                 keyExtractor={item => item.id.toString()}
@@ -74,14 +75,16 @@ export const HomeScreen = ({ navigation }) => {
             </View>
 
         </View>
+        </>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 10,
         justifyContent: 'center',
+        alignItems:'center',
+        alignContent: 'center'
     },
     searchBar: {
         height: 40,
@@ -89,19 +92,14 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 5,
         paddingHorizontal: 10,
-        marginBottom: 10
+        margin: 10,
+        backgroundColor: 'white'
     },
     carrito: {
         fontSize: 24,
         fontWeight: 'bold',
         marginVertical: 20,
         textAlign: 'center'
-    },
-    scrollContainer: {
-        alignItems: 'center'
-    },
-    flatListContainer: {
-        justifyContent: 'center'
     },
     touchable: {
         flex: 1,

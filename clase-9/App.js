@@ -52,9 +52,8 @@ function AppNavigator(){
   return (
     <Stack.Navigator
       screenOptions={{
-        cardStyle: {
           backgroundColor: 'white'
-        }
+        
       }}
     >
       {

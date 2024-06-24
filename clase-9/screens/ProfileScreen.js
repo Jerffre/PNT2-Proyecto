@@ -24,13 +24,13 @@ const ProfileScreen = ({}) => {
         source={userData.avatar} />
        </View> 
       <Text style={styles.label}>Name </Text>
-      <Text style={styles.label}>{userData.username}</Text>
+      <TextInput style={styles.input}>{userData.username}</TextInput>
        <Text style={styles.label}>Mail</Text>
-       <Text style={styles.Text}>{userData.email}</Text>
+       <TextInput style={styles.input}>{userData.email}</TextInput>
 
          <View style={styles.footer}>
            <Text style={styles.footerText}></Text>
-           <Button title="Logout" onPress={() => logOut2()} color="red" />
+           <Button style={styles.boton} title="Logout" onPress={() => logOut2()} color="red" />
          </View>
         </>
          )
@@ -45,8 +45,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    justifyContent: 'center',
+    marginTop:30,
     alignItems: 'center',
+    
   },
   profilePicContainer: {
     alignItems: 'center',
@@ -56,46 +57,30 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 50,
-    backgroundColor: '#ccc', // Just for visualization, you can remove it
+    backgroundColor: '#ccc', 
   },
   label: {
-    alignSelf: 'flex-start',
-    marginLeft: 40,
-    marginBottom: 5,
+    alignSelf:'flex-start',
+    marginBottom: 10,
+    paddingLeft: 20,
+    marginTop:20,
+    fontSize: 16,
+    fontWeight: '700',
+    color: 'black',
   },
-  input: {
+  input:{
+    alignSelf: 'center',
     height: 40,
-    width: '80%',
-    borderColor: 'gray',
+    borderColor: 'black',
     borderWidth: 1,
-    marginBottom: 15,
+    marginBottom: 30,
     paddingHorizontal: 10,
+    width: 300,
+    backgroundColor: 'white',
+    color: 'grey',
   },
-  footer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '80%',
-    marginTop: 20,
-  },
-  footerText: {
-    color: 'blue',
-    textDecorationLine: 'underline',
-  },
-  navbar: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    width: '100%',
-    position: 'absolute',
-    bottom: 0,
-    backgroundColor: '#e0f7fa',
-    paddingVertical: 10,
-  },
-  navItem: {
-    alignItems: 'center',
-  },
-  homeIcon: {
-    width: 24,
-    height: 24,
+  boton:{
+    marginTop: 100,
   },
 });
 
