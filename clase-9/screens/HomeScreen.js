@@ -30,6 +30,7 @@ export const HomeScreen = ({ navigation }) => {
         <TouchableOpacity
             style={styles.touchable}
             key={item.id}
+            //onPress={() => getUserData() }
             onPress={() => navigation.navigate('MovieDetail', { movie: item, user: userData })}
         >
             <MovieCard
@@ -65,6 +66,7 @@ export const HomeScreen = ({ navigation }) => {
                   <Text style={styles.footerText}>Contraseña?</Text>
                 <Button title="Logout" onPress={() => logout()} color="red" />
             </View>
+
         </View>
     );
 };

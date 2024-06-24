@@ -10,32 +10,44 @@ export const FavoritesProvider = ({ children }) => {
 
     const [status, setStatus] = useState('checking');
 
-    const user = useContext(AuthContext)
-
-    const addfavorite = async (movieId) => {
-        try {
-            user
-              const respuesta = await fetch(`${url}/`)
-        } catch (error) {
-            
-        }
-    }
-
+    const {userData} = useContext(AuthContext)
+    
     const getFavorites = async () => {
-
-        try {
-
-            const respuesta = await fetch(`${url}favorites`);
-            const favorites = await respuesta.json()
-
-            const user_id = user.find( element => element.user_id == user.id)
-
-            
+        
+            try {
+                const userId = userData.id
+                const respuesta = await fetch(`${url}/favorites`);
+                return await respuesta.find(e => e.user_id == userId.id)
             
         } catch (error) {
             
         }
-
     }
 
+    const addFavorite = async (movie) => {
+        try {
+
+            const favorites = getFavorites()
+            console.log(favorites)
+            const respuesta = await fetch(`https://6656578f9f970b3b36c51233.mockapi.io/api/v1/favorites/${favorites.id}`,{
+                method: 'PUT',
+                headers: {
+                    'Content-Type':'application/json',
+                },
+                body:{
+                    favorites_ids: favorites.favorites_ids.push(movie)
+                }
+            });
+            } catch (error) {
+                
+            }
+        }
+        
+
+  
+    return (
+        <FavoritesContext.Provider value={{ getFavorites, addFavorite }}>
+            { children }
+        </FavoritesContext.Provider>
+     )
 }   

@@ -27,6 +27,7 @@ export const MovieProvider = ({ children }) => {
             console.error('Error en el fetch de MoviesPremiere: ', error)
         }
     }
+    
 
     useEffect(() => {
         fetchMoviesPremiere();

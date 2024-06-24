@@ -16,7 +16,7 @@ export const MovieDetailScreen = ({ route }) => {
                 resizeMode='contain'
                 source={{ uri: 'https://image.tmdb.org/t/p/w500/' + movie.backdrop_path }}
             />
-            <Text style={styles.title}>{user.username}</Text>
+            <Text style={styles.title}>{movie.title}</Text>
             
             <Text style={[styles.description, styles.justifiedText]}>{movie.overview}</Text>
 

@@ -3,10 +3,14 @@ import { Button, FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View,
 import { AuthContext } from '../context/AuthContext'
 import { MovieContext } from '../context/MovieContext'
 import { MovieCard } from '../components/MovieCard'
+import { FavoritesContext } from '../context/FavoritesContext'
 
 export const MoviesFavoritesScreen = ({navigation}) => {      
     
-    const { moviesPremiere, fetchMoviesPremiere } = useContext(MovieContext)
+    const { moviesPremiere, fetchMoviesPremiere } = useContext(MovieContext);
+    const { getFavorites} = useContext(FavoritesContext);
+
+    const favoritesMovies = getFavorites()
 
     const renderItem = ({ item }) => (
         <TouchableOpacity 
@@ -25,7 +29,7 @@ export const MoviesFavoritesScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
         <FlatList
-            data={moviesPremiere}
+            data={favoritesMovies}
             renderItem={ renderItem }
             keyExtractor={ item => item.id.toString()}
             contentContainerStyle={ styles.flatListContainer}
