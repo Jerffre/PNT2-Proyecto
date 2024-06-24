@@ -24,17 +24,13 @@ export const MoviesFavoritesScreen = ({navigation}) => {
     
   return (
     <View style={styles.container}>
-        
-        
         <FlatList
             data={moviesPremiere}
             renderItem={ renderItem }
             keyExtractor={ item => item.id.toString()}
             contentContainerStyle={ styles.flatListContainer}
             numColumns={2}
-            
         />
-        
     </View>
   )
 }

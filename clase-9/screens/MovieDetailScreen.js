@@ -1,15 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Image, StyleSheet, Text, View, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { AuthContext } from '../context/AuthContext';
 
 export const MovieDetailScreen = ({ route }) => {
 
-    const movie = route.params.movie;
+    const {movie, user} = route.params;
     
     const navigation = useNavigation();
-
-    console.log(movie)
-
+   
     return (
         <ScrollView contentContainerStyle={styles.container}>
             <Image 
@@ -17,7 +16,7 @@ export const MovieDetailScreen = ({ route }) => {
                 resizeMode='contain'
                 source={{ uri: 'https://image.tmdb.org/t/p/w500/' + movie.backdrop_path }}
             />
-            <Text style={styles.title}>{movie.title}</Text>
+            <Text style={styles.title}>{user.username}</Text>
             
             <Text style={[styles.description, styles.justifiedText]}>{movie.overview}</Text>
 

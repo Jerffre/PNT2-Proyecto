@@ -12,6 +12,15 @@ export const FavoritesProvider = ({ children }) => {
 
     const user = useContext(AuthContext)
 
+    const addfavorite = async (movieId) => {
+        try {
+            user
+              const respuesta = await fetch(`${url}/`)
+        } catch (error) {
+            
+        }
+    }
+
     const getFavorites = async () => {
 
         try {

@@ -6,7 +6,7 @@ import { MovieCard } from '../components/MovieCard';
 
 export const HomeScreen = ({ navigation }) => {
 
-    const { logout } = useContext(AuthContext);
+    const { logout, userData} = useContext(AuthContext);
     const { moviesPremiere, fetchMoviesPremiere } = useContext(MovieContext);
     const [refreshing, setRefreshing] = useState(false);
     const [searchText, setSearchText] = useState('');
@@ -30,7 +30,7 @@ export const HomeScreen = ({ navigation }) => {
         <TouchableOpacity
             style={styles.touchable}
             key={item.id}
-            onPress={() => navigation.navigate('MovieDetail', { movie: item })}
+            onPress={() => navigation.navigate('MovieDetail', { movie: item, user: userData })}
         >
             <MovieCard
                 title={item.title}
@@ -61,6 +61,10 @@ export const HomeScreen = ({ navigation }) => {
                     />
                 }
             />
+             <View style={styles.footer}>
+                  <Text style={styles.footerText}>Contraseña?</Text>
+                <Button title="Logout" onPress={() => logout()} color="red" />
+            </View>
         </View>
     );
 };

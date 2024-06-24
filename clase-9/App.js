@@ -33,7 +33,7 @@ function SideTab() {
     <Drawer.Navigator>
         <Drawer.Screen name="HomeScreen" component={HomeScreen} />
         <Drawer.Screen name="MovieFavorites" component={MoviesFavoritesScreen} />
-        <Drawer.Screen name="Perfil" component={ProfileScreen} />
+        <Drawer.Screen name="Profile" component={ProfileScreen} />
         <Drawer.Screen name="Help" component={HelpScreen} /> 
         <Drawer.Screen name="AboutUs" component={AboutUsScreen} />
     </Drawer.Navigator>
@@ -78,7 +78,7 @@ export default function App() {
     <AuthProvider>
       <MovieProvider>
       <NavigationContainer>
-          <AppNavigator />            
+          <AppNavigator/>            
       </NavigationContainer>
       </MovieProvider>
     </AuthProvider>

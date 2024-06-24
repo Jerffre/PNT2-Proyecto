@@ -1,28 +1,41 @@
 import React, { useContext } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Image } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
+import { ScrollView } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
-const ProfileScreen = () => {
-  const { logout } = useContext(AuthContext);
+const ProfileScreen = ({}) => {
+  const { logout, userData } = useContext(AuthContext);
+      
+  const navigation = useNavigation()
 
+  const logOut2 = () => {
+    navigation.navigate('RegisterLogin')
+    logout()
+  }
   return (
     <ScrollView contentContainerStyle={styles.container}>
-
+ 
+      { userData != null ?
+      ( 
+      <>
       <View style={styles.profilePicContainer}>
-        <Image style={styles.profilePic}
-        source={require('../path/to/profile-pic.png')} />
-      </View>
+         <Image style={styles.profilePic}
+        source={userData.avatar} />
+       </View> 
+      <Text style={styles.label}>Name </Text>
+      <Text style={styles.label}>{userData.username}</Text>
+       <Text style={styles.label}>Mail</Text>
+       <Text style={styles.Text}>{userData.email}</Text>
 
-      <Text style={styles.label}>Nombre de Usuario</Text>
-      <Text style={styles.Text}>{username}</Text>
-
-      <Text style={styles.label}>Mail</Text>
-      <Text style={styles.Text}>{email}</Text>
-
-      <View style={styles.footer}>
-        <Text style={styles.footerText}>Contraseña?</Text>
-        <Button title="Logout" onPress={() => logout()} color="red" />
-      </View>
+         <View style={styles.footer}>
+           <Text style={styles.footerText}></Text>
+           <Button title="Logout" onPress={() => logOut2()} color="red" />
+         </View>
+        </>
+         )
+      : (<Text> holu </Text>)
+      }
 
     </ScrollView>
   );
