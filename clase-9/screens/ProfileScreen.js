@@ -34,7 +34,7 @@ const ProfileScreen = ({}) => {
          </View>
         </>
          )
-      : (<Text> holu </Text>)
+      : (<Text> Logueate para poder ver tu info </Text>)
       }
 
     </ScrollView>

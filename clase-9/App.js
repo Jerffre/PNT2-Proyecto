@@ -17,6 +17,7 @@ import ProfileScreen from './screens/ProfileScreen';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NotificationsScreen } from './screens/NotificationsScreen';
 import { NotificationsProvider } from './context/NotificationsContext';
+import { FavoritesProvider } from './context/FavoritesContext';
 
 
 const Stack = createStackNavigator();
@@ -80,13 +81,15 @@ function AppNavigator(){
 export default function App() {
   return (
     <AuthProvider>
-      <MovieProvider>
-      <NotificationsProvider>
-      <NavigationContainer>
-          <AppNavigator/>            
-      </NavigationContainer>
-      </NotificationsProvider>
-      </MovieProvider>
+      <FavoritesProvider>
+        <MovieProvider>
+          <NotificationsProvider>
+            <NavigationContainer>
+                <AppNavigator/>            
+            </NavigationContainer>
+          </NotificationsProvider>
+        </MovieProvider>
+      </FavoritesProvider>
     </AuthProvider>
   );
 }

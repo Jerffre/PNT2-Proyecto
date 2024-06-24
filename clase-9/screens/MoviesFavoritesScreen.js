@@ -8,11 +8,13 @@ import { FavoritesContext } from '../context/FavoritesContext'
 export const MoviesFavoritesScreen = ({navigation}) => {      
     
     const { moviesPremiere, fetchMoviesPremiere } = useContext(MovieContext);
-    const { getFavorites} = useContext(FavoritesContext);
+    const {favorites, deleteFavoritos2} = useContext(FavoritesContext)
+    // const { getFavorites} = useContext(FavoritesContext);
 
-    const favoritesMovies = getFavorites()
+    // const favoritesMovies = getFavorites()
 
     const renderItem = ({ item }) => (
+        <>
         <TouchableOpacity 
         style={styles.touchable}
         key={item.id}
@@ -23,13 +25,15 @@ export const MoviesFavoritesScreen = ({navigation}) => {
             overview={item.overview}
             image={'https://image.tmdb.org/t/p/w500/'+item.backdrop_path}            
             />
+        <Button title="Quitar de la lista" onPress = {() => deleteFavoritos2(item.id)} color="red" /> 
         </TouchableOpacity>
+        </>
     )
     
   return (
     <View style={styles.container}>
         <FlatList
-            data={favoritesMovies}
+            data={favorites}
             renderItem={ renderItem }
             keyExtractor={ item => item.id.toString()}
             contentContainerStyle={ styles.flatListContainer}

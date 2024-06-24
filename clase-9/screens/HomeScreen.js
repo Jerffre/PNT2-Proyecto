@@ -3,6 +3,7 @@ import { Button, FlatList, ScrollView, StyleSheet, Text, TextInput, TouchableOpa
 import { AuthContext } from '../context/AuthContext';
 import { MovieContext } from '../context/MovieContext';
 import { MovieCard } from '../components/MovieCard';
+import { FavoritesContext } from '../context/FavoritesContext';
 
 export const HomeScreen = ({ navigation }) => {
 
@@ -11,6 +12,7 @@ export const HomeScreen = ({ navigation }) => {
     const [refreshing, setRefreshing] = useState(false);
     const [searchText, setSearchText] = useState('');
     const [filteredMovies, setFilteredMovies] = useState(moviesPremiere);
+    const {addFavoritos2} = useContext(FavoritesContext)
 
     useEffect(() => {
         setFilteredMovies(
@@ -26,7 +28,9 @@ export const HomeScreen = ({ navigation }) => {
         setRefreshing(false);
     };
 
+    
     const renderItem = ({ item }) => (
+        <>
         <TouchableOpacity
             style={styles.touchable}
             key={item.id}
@@ -37,8 +41,11 @@ export const HomeScreen = ({ navigation }) => {
                 title={item.title}
                 overview={item.overview}
                 image={'https://image.tmdb.org/t/p/w500/' + item.backdrop_path}
+                item={item}
             />
+         <Button title="Add favorites" onPress = {() => addFavoritos2(item)} color="red" />   
         </TouchableOpacity>
+        </>
     );
 
     return (
@@ -54,7 +61,7 @@ export const HomeScreen = ({ navigation }) => {
                 renderItem={renderItem}
                 keyExtractor={item => item.id.toString()}
                 contentContainerStyle={styles.flatListContainer}
-                numColumns={2}
+                numColumns={1}
                 refreshControl={
                     <RefreshControl
                         refreshing={refreshing}
@@ -63,7 +70,6 @@ export const HomeScreen = ({ navigation }) => {
                 }
             />
              <View style={styles.footer}>
-                  <Text style={styles.footerText}>Contraseña?</Text>
                 <Button title="Logout" onPress={() => logout()} color="red" />
             </View>
 
@@ -75,7 +81,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 10,
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     searchBar: {
         height: 40,
@@ -100,6 +106,6 @@ const styles = StyleSheet.create({
     touchable: {
         flex: 1,
         margin: 10,
-        maxWidth: '45%'
+
     }
 });
