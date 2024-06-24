@@ -4,6 +4,7 @@ import { AuthContext } from '../context/AuthContext';
 import { MovieContext } from '../context/MovieContext';
 import { MovieCard } from '../components/MovieCard';
 import { FavoritesContext } from '../context/FavoritesContext';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export const HomeScreen = ({ navigation }) => {
 
@@ -50,12 +51,20 @@ export const HomeScreen = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <TextInput
-                style={styles.searchBar}
-                placeholder="Search for a movie..."
-                value={searchText}
-                onChangeText={setSearchText}
-            />
+            <View style={styles.searchContainer}>
+                <TextInput
+                    style={styles.searchBar}
+                    placeholder="Search for a movie..."
+                    value={searchText}
+                    onChangeText={setSearchText}
+                />
+                <Icon
+                    name="search"
+                    size={20}
+                    color="gray"
+                    style={styles.searchIcon}
+                />
+            </View>
             <FlatList
                 data={filteredMovies}
                 renderItem={renderItem}
@@ -69,10 +78,9 @@ export const HomeScreen = ({ navigation }) => {
                     />
                 }
             />
-             <View style={styles.footer}>
+            <View style={styles.footer}>
                 <Button title="Logout" onPress={() => logout()} color="red" />
             </View>
-
         </View>
     );
 };
@@ -83,29 +91,33 @@ const styles = StyleSheet.create({
         padding: 10,
         justifyContent: 'center',
     },
-    searchBar: {
-        height: 40,
+    searchContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
         borderColor: 'gray',
         borderWidth: 1,
         borderRadius: 5,
         paddingHorizontal: 10,
-        marginBottom: 10
+        marginBottom: 10,
     },
-    carrito: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginVertical: 20,
-        textAlign: 'center'
+    searchBar: {
+        flex: 1,
+        height: 40,
+        paddingHorizontal: 10,
     },
-    scrollContainer: {
-        alignItems: 'center'
+    searchIcon: {
+        marginRight: 10,
     },
     flatListContainer: {
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     touchable: {
         flex: 1,
         margin: 10,
-
-    }
+    },
+    footer: {
+        marginTop: 20,
+    },
 });
+
+export default HomeScreen;

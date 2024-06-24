@@ -1,42 +1,43 @@
 import React, { useContext } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Image } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
+import { FontAwesome } from '@expo/vector-icons'; // Asegúrate de tener instalado @expo/vector-icons
 
-const ProfileScreen = ({}) => {
+const ProfileScreen = () => {
   const { logout, userData } = useContext(AuthContext);
-      
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   const logOut2 = () => {
-    navigation.navigate('RegisterLogin')
-    logout()
+    navigation.navigate('RegisterLogin');
+    logout();
   }
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
- 
-      { userData != null ?
-      ( 
-      <>
-      <View style={styles.profilePicContainer}>
-         <Image style={styles.profilePic}
-        source={userData.avatar} />
-       </View> 
-      <Text style={styles.label}>Name </Text>
-      <Text style={styles.label}>{userData.username}</Text>
-       <Text style={styles.label}>Mail</Text>
-       <Text style={styles.Text}>{userData.email}</Text>
-
-         <View style={styles.footer}>
-           <Text style={styles.footerText}></Text>
-           <Button title="Logout" onPress={() => logOut2()} color="red" />
-         </View>
+      {userData != null ? (
+        <>
+          <View style={styles.profilePicContainer}>
+            <Image style={styles.profilePic} source={userData.avatar} />
+          </View>
+          <View style={styles.infoContainer}>
+            <Text style={styles.labelBold}>Name: </Text>
+            <Text style={styles.text}>{userData.username}</Text>
+          </View>
+          <View style={styles.infoContainer}>
+            <Text style={styles.labelBold}>Mail: </Text>
+            <Text style={styles.text}>{userData.email}</Text>
+          </View>
+          <View style={styles.footer}>
+            <TouchableOpacity onPress={logOut2} style={styles.logoutButton}>
+              <FontAwesome name="sign-out" size={70} color="red" />
+            </TouchableOpacity>
+          </View>
         </>
-         )
-      : (<Text> Logueate para poder ver tu info </Text>)
-      }
-
+      ) : (
+        <Text>Logueate para poder ver tu info</Text>
+      )}
     </ScrollView>
   );
 }
@@ -53,49 +54,29 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   profilePic: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    backgroundColor: '#ccc', // Just for visualization, you can remove it
+    width: 200, 
+    height: 200, 
+    borderRadius: 100, 
+    backgroundColor: '#ccc',
   },
-  label: {
-    alignSelf: 'flex-start',
-    marginLeft: 40,
-    marginBottom: 5,
+  infoContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
   },
-  input: {
-    height: 40,
-    width: '80%',
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 15,
-    paddingHorizontal: 10,
+  labelBold: {
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  text: {
+    fontSize: 16,
+    marginLeft: 10,
   },
   footer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '80%',
     marginTop: 20,
   },
-  footerText: {
-    color: 'blue',
-    textDecorationLine: 'underline',
-  },
-  navbar: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    width: '100%',
-    position: 'absolute',
-    bottom: 0,
-    backgroundColor: '#e0f7fa',
-    paddingVertical: 10,
-  },
-  navItem: {
-    alignItems: 'center',
-  },
-  homeIcon: {
-    width: 24,
-    height: 24,
+  logoutButton: {
+    padding: 30,
   },
 });
 
