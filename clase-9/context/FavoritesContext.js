@@ -48,18 +48,19 @@ export const FavoritesProvider = ({ children }) => {
     const addFavoritos2 = (item) => {
 
         const peliculaFavorita = favorites.find(f => f.id===item.id)
+
         if(peliculaFavorita){
             alert('La pelicula ya esta en tu lista de favoritos')
             setFavorites([...favorites])
         }else{
-            alert('Agregaste la pelicula tu lista de favoritos')
+            alert('Agregaste la pelicula a tu lista de favoritos')
             setFavorites([...favorites, {...item}])
             setContador(contador + 1)
         }
     }
 
     const deleteFavoritos2 = (id) => {
-        alert('Quitaste la pelicula tu lista de favoritos')
+        alert('Quitaste la pelicula de tu lista de favoritos')
         setContador(contador - 1)
         return setFavorites(favorites.filter((fa) => fa.id !== id))
     }

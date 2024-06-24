@@ -27,18 +27,28 @@ export const MoviesFavoritesScreen = ({navigation}) => {
             />
         <Button title="Quitar de la lista" onPress = {() => deleteFavoritos2(item.id)} color="red" /> 
         </TouchableOpacity>
+
         </>
     )
     
   return (
     <View style={styles.container}>
+                {favorites.length === 0 ? 
+        <View>
+
+        <Text>No tenes ninguna pelicula en la lista </Text>
+        </View>
+         
+         :
+         
         <FlatList
             data={favorites}
             renderItem={ renderItem }
             keyExtractor={ item => item.id.toString()}
             contentContainerStyle={ styles.flatListContainer}
-            numColumns={2}
+            numColumns={1}
         />
+                }
     </View>
   )
 }
@@ -64,6 +74,5 @@ const styles = StyleSheet.create({
     touchable:{
         flex: 1,
         margin: 10,
-        maxWidth: '45%'
     }
 })

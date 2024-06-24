@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Button, Image, StyleSheet, Text, View } from 'react-native'
 import { FavoritesContext } from '../context/FavoritesContext'
 
-export const MovieCard = ({title, overview, image, item}) => {
+export const MovieCard = ({title, overview, image}) => {
 
     //console.log(overview);
     //const {addFavorite} = useContext(FavoritesContext);
@@ -11,12 +11,10 @@ export const MovieCard = ({title, overview, image, item}) => {
     //     overview,
     //     image
     // }
-    const {addFavorites2} = useContext(FavoritesContext);
     const tituloAcortado = title.length > 30 ? title.substring(0, 30) + '...' : title
-    const overviewAcortado = overview.length > 90 ? overview.substring(0, 90) + '...' : overview
+    const overviewAcortado = overview.length > 70 ? overview.substring(0, 70) + '...' : overview
 
   return (
-    <>
     <View style={ styles.card}>
         <Image 
             style={ styles.image}
@@ -26,8 +24,6 @@ export const MovieCard = ({title, overview, image, item}) => {
         <Text style={styles.title}>{tituloAcortado}</Text>
         <Text style={styles.overview}>{overviewAcortado}</Text>
     </View>
-        {/* <Button title="Add favorites" onPress = {() => addFavorites2(item)} color="red" />         */}
-    </>
   )
 }
 
