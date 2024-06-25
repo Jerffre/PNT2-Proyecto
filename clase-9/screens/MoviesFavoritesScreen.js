@@ -1,35 +1,27 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Button, FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View, RefreshControl } from 'react-native'
-import { AuthContext } from '../context/AuthContext'
-import { MovieContext } from '../context/MovieContext'
-import { MovieCard } from '../components/MovieCard'
-import { FavoritesContext } from '../context/FavoritesContext'
+import React, { useContext } from 'react';
+import { Button, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { MovieContext } from '../context/MovieContext';
+import { FavoritesContext } from '../context/FavoritesContext';
+import { MovieCard } from '../components/MovieCard';
 
 export const MoviesFavoritesScreen = ({navigation}) => {      
     
-    const { moviesPremiere, fetchMoviesPremiere } = useContext(MovieContext);
-    const {favorites, deleteFavoritos2} = useContext(FavoritesContext)
-    // const { getFavorites} = useContext(FavoritesContext);
-
-    // const favoritesMovies = getFavorites()
+    const { favorites, deleteFavoritos2 } = useContext(FavoritesContext);
 
     const renderItem = ({ item }) => (
-        <>
         <TouchableOpacity 
-        style={styles.touchable}
-        key={item.id}
-        onPress={() => navigation.navigate('MovieDetail', { movie: item})}
+            style={styles.touchable}
+            key={item.id}
+            onPress={() => navigation.navigate('MovieDetail', { movie: item })}
         >
-        <MovieCard 
-            title={item.title}
-            overview={item.overview}
-            image={'https://image.tmdb.org/t/p/w500/'+item.backdrop_path}            
+            <MovieCard 
+                title={item.title}
+                overview={item.overview}
+                image={`https://image.tmdb.org/t/p/w500/${item.backdrop_path}`}            
             />
         <Button title="♥ quitar favorito" onPress = {() => deleteFavoritos2(item.id)} color="red" /> 
         </TouchableOpacity>
-
-        </>
-    )
+    );
     
   return (
     <View style={styles.container}>
@@ -69,10 +61,16 @@ const styles = StyleSheet.create({
     scrollContainer:{
         alignItems: 'center'
     },
-    flatListContainer:{
+    emptyText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        color: '#555'
+    },
+    flatListContainer: {
         justifyContent: 'center'
     },
-    touchable:{
+    touchable: {
         flex: 1,
         margin: 10,
     },
@@ -81,4 +79,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: 'red',
     }
-})
+});
+
+export default MoviesFavoritesScreen;

@@ -1,18 +1,19 @@
 import React, { useContext } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Image } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
+import { FontAwesome } from '@expo/vector-icons'; // Asegúrate de tener instalado @expo/vector-icons
 
-const ProfileScreen = ({}) => {
+const ProfileScreen = () => {
   const { logout, userData } = useContext(AuthContext);
-      
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   const logOut2 = () => {
-    navigation.navigate('RegisterLogin')
-    logout()
+    navigation.navigate('RegisterLogin');
+    logout();
   }
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
  
@@ -23,9 +24,9 @@ const ProfileScreen = ({}) => {
          <Image style={styles.profilePic}
         source={userData.avatar} />
        </View> 
-      <Text style={styles.label}>Name </Text>
+      <Text style={styles.label}>Name: </Text>
       <TextInput style={styles.input}>{userData.username}</TextInput>
-       <Text style={styles.label}>Mail</Text>
+       <Text style={styles.label}>Mail:</Text>
        <TextInput style={styles.input}>{userData.email}</TextInput>
 
          <View style={styles.footer}>
@@ -33,10 +34,9 @@ const ProfileScreen = ({}) => {
            <Button style={styles.boton} title="Logout" onPress={() => logOut2()} color="red" />
          </View>
         </>
-         )
-      : (<Text> Logueate para poder ver tu info </Text>)
-      }
-
+      ) : (
+        <Text>Logueate para poder ver tu info</Text>
+      )}
     </ScrollView>
   );
 }
