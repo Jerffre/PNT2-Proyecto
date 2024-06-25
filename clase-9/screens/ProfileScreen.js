@@ -1,18 +1,19 @@
 import React, { useContext } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Image } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, TextInput, Button } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
+import { FontAwesome } from '@expo/vector-icons'; // Asegúrate de tener instalado @expo/vector-icons
 
 const ProfileScreen = ({children}) => {
   const { logout, userData } = useContext(AuthContext);
-      
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   const logOut2 = () => {
-    navigation.navigate('RegisterLogin')
-    logout()
+    navigation.navigate('RegisterLogin');
+    logout();
   }
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
  
@@ -23,20 +24,19 @@ const ProfileScreen = ({children}) => {
          <Image style={styles.profilePic}
         source={userData.avatar} />
        </View> 
-      <Text style={styles.label}>Name </Text>
-      <Text style={styles.label}>{userData.username}</Text>
-       <Text style={styles.label}>Mail</Text>
-       <Text style={styles.Text}>{userData.email}</Text>
+      <Text style={styles.label}>Name: </Text>
+      <TextInput style={styles.input}>{userData.username}</TextInput>
+       <Text style={styles.label}>Mail:</Text>
+       <TextInput style={styles.input}>{userData.email}</TextInput>
 
          <View style={styles.footer}>
            <Text style={styles.footerText}></Text>
-           <Button title="Logout" onPress={() => logOut2()} color="red" />
+           <Button style={styles.boton} title="Logout" onPress={() => logOut2()} color="red" />
          </View>
         </>
-         )
-      : (<Text> holu </Text>)
-      }
-
+      ) : (
+        <Text style={styles.texto}>Logueate para poder ver tu info</Text>
+      )}
     </ScrollView>
   );
 }
@@ -45,8 +45,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    justifyContent: 'center',
+    marginTop:30,
     alignItems: 'center',
+    
   },
   profilePicContainer: {
     alignItems: 'center',
@@ -56,47 +57,36 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 50,
-    backgroundColor: '#ccc', // Just for visualization, you can remove it
+    backgroundColor: '#ccc', 
   },
   label: {
-    alignSelf: 'flex-start',
-    marginLeft: 40,
-    marginBottom: 5,
+    alignSelf:'flex-start',
+    marginBottom: 10,
+    paddingLeft: 20,
+    marginTop:20,
+    fontSize: 16,
+    fontWeight: '700',
+    color: 'black',
   },
-  input: {
+  input:{
+    alignSelf: 'center',
     height: 40,
-    width: '80%',
-    borderColor: 'gray',
+    borderColor: 'black',
     borderWidth: 1,
-    marginBottom: 15,
+    marginBottom: 30,
     paddingHorizontal: 10,
+    width: 300,
+    backgroundColor: 'white',
+    color: 'grey',
   },
-  footer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '80%',
-    marginTop: 20,
+  boton:{
+    marginTop: 100,
   },
-  footerText: {
-    color: 'blue',
-    textDecorationLine: 'underline',
-  },
-  navbar: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    width: '100%',
-    position: 'absolute',
-    bottom: 0,
-    backgroundColor: '#e0f7fa',
-    paddingVertical: 10,
-  },
-  navItem: {
-    alignItems: 'center',
-  },
-  homeIcon: {
-    width: 24,
-    height: 24,
-  },
+  texto: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'red',
+}
 });
 
 export default ProfileScreen;

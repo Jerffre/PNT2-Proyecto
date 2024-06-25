@@ -16,6 +16,10 @@ import AboutUsScreen from './screens/AboutUsScreen';
 import HelpScreen from './screens/HelpScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NotificationsScreen } from './screens/NotificationsScreen';
+import { NotificationsProvider } from './context/NotificationsContext';
+import { FavoritesProvider } from './context/FavoritesContext';
+
 import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
 import { NotificationsContext, NotificationsProvider} from './context/NotificationsContext';
@@ -50,9 +54,8 @@ function AppNavigator(){
   return (
     <Stack.Navigator
       screenOptions={{
-        cardStyle: {
           backgroundColor: 'white'
-        }
+        
       }}
     >
       {
@@ -80,13 +83,15 @@ export default function App() {
 
   return (
     <AuthProvider>
-      <MovieProvider>
-        <NotificationsProvider>
-          <NavigationContainer>
-            <AppNavigator/>            
-          </NavigationContainer>
-        </NotificationsProvider>
-      </MovieProvider>
+      <FavoritesProvider>
+        <MovieProvider>
+          <NotificationsProvider>
+            <NavigationContainer>
+                <AppNavigator/>            
+            </NavigationContainer>
+          </NotificationsProvider>
+        </MovieProvider>
+      </FavoritesProvider>
     </AuthProvider>
   );
 }

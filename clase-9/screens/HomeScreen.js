@@ -3,6 +3,8 @@ import { Button, FlatList, ScrollView, StyleSheet, Text, TextInput, TouchableOpa
 import { AuthContext } from '../context/AuthContext';
 import { MovieContext } from '../context/MovieContext';
 import { MovieCard } from '../components/MovieCard';
+import { FavoritesContext } from '../context/FavoritesContext';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export const HomeScreen = ({ navigation }) => {
 
@@ -11,6 +13,7 @@ export const HomeScreen = ({ navigation }) => {
     const [refreshing, setRefreshing] = useState(false);
     const [searchText, setSearchText] = useState('');
     const [filteredMovies, setFilteredMovies] = useState(moviesPremiere);
+    const {addFavoritos2} = useContext(FavoritesContext)
 
     useEffect(() => {
         setFilteredMovies(
@@ -26,7 +29,9 @@ export const HomeScreen = ({ navigation }) => {
         setRefreshing(false);
     };
 
+    
     const renderItem = ({ item }) => (
+        <>
         <TouchableOpacity
             style={styles.touchable}
             key={item.id}
@@ -37,24 +42,36 @@ export const HomeScreen = ({ navigation }) => {
                 title={item.title}
                 overview={item.overview}
                 image={'https://image.tmdb.org/t/p/w500/' + item.backdrop_path}
+                item={item}
             />
+         <Button title='♥ agregar favorito' onPress = {() => addFavoritos2(item)} color="red" />   
         </TouchableOpacity>
+        </>
     );
 
     return (
+        <>
+            <View style={styles.searchContainer}>
+                <TextInput
+                    style={styles.searchBar}
+                    placeholder="Search for a movie..."
+                    value={searchText}
+                    onChangeText={setSearchText}
+                />
+                <Icon
+                    name="search"
+                    size={20}
+                    color="gray"
+                    style={styles.searchIcon}
+                />
+            </View>
         <View style={styles.container}>
-            <TextInput
-                style={styles.searchBar}
-                placeholder="Search for a movie..."
-                value={searchText}
-                onChangeText={setSearchText}
-            />
-            <FlatList
+            <FlatList 
                 data={filteredMovies}
                 renderItem={renderItem}
                 keyExtractor={item => item.id.toString()}
                 contentContainerStyle={styles.flatListContainer}
-                numColumns={2}
+                numColumns={1}
                 refreshControl={
                     <RefreshControl
                         refreshing={refreshing}
@@ -62,12 +79,11 @@ export const HomeScreen = ({ navigation }) => {
                     />
                 }
             />
-             <View style={styles.footer}>
-                  <Text style={styles.footerText}>Contraseña?</Text>
-                <Button title="Logout" onPress={() => logout()} color="red" />
+                <View style={styles.footer}>
+                    <Button title="Logout" onPress={() => logout()} color="red" />
+                </View>
             </View>
-
-        </View>
+        </>
     );
 };
 
@@ -75,31 +91,38 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 10,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignItems:'center',
     },
-    searchBar: {
-        height: 40,
+    searchContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
         borderColor: 'gray',
         borderWidth: 1,
         borderRadius: 5,
         paddingHorizontal: 10,
-        marginBottom: 10
+        marginBottom: 10,
+        margin: 10,
+        backgroundColor:'white',
     },
-    carrito: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginVertical: 20,
-        textAlign: 'center'
+    searchBar: {
+        flex: 1,
+        height: 40,
+        paddingHorizontal: 10,
     },
-    scrollContainer: {
-        alignItems: 'center'
+    searchIcon: {
+        marginRight: 10,
     },
     flatListContainer: {
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     touchable: {
         flex: 1,
         margin: 10,
-        maxWidth: '45%'
-    }
+    },
+    footer: {
+        marginTop: 20,
+    },
 });
+
+export default HomeScreen;
