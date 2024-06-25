@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -15,9 +16,9 @@ import AboutUsScreen from './screens/AboutUsScreen';
 import HelpScreen from './screens/HelpScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NotificationsScreen } from './screens/NotificationsScreen';
-import { NotificationsProvider } from './context/NotificationsContext';
-
+import * as Notifications from 'expo-notifications';
+import Constants from 'expo-constants';
+import { NotificationsContext, NotificationsProvider} from './context/NotificationsContext';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -39,11 +40,9 @@ function SideTab() {
         <Drawer.Screen name="Profile" component={ProfileScreen} />
         <Drawer.Screen name="Help" component={HelpScreen} /> 
         <Drawer.Screen name="AboutUs" component={AboutUsScreen} />
-        <Drawer.Screen name="Notifications" component={NotificationsScreen} />
     </Drawer.Navigator>
   )
 }
-
 
 function AppNavigator(){
   const { status } = useContext(AuthContext)
@@ -78,19 +77,19 @@ function AppNavigator(){
 
 
 export default function App() {
+
   return (
     <AuthProvider>
       <MovieProvider>
-      <NotificationsProvider>
-      <NavigationContainer>
-          <AppNavigator/>            
-      </NavigationContainer>
-      </NotificationsProvider>
+        <NotificationsProvider>
+          <NavigationContainer>
+            <AppNavigator/>            
+          </NavigationContainer>
+        </NotificationsProvider>
       </MovieProvider>
     </AuthProvider>
   );
 }
-
 
 
 

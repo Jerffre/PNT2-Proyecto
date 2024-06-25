@@ -4,7 +4,7 @@ import { AuthContext } from '../context/AuthContext';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 
-const ProfileScreen = ({}) => {
+const ProfileScreen = ({children}) => {
   const { logout, userData } = useContext(AuthContext);
       
   const navigation = useNavigation()
