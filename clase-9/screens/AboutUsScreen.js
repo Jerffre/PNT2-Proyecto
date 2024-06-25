@@ -49,7 +49,8 @@ const styles = StyleSheet.create({
     description: {
     fontSize: 16,
     marginBottom: 10,
-    textAlign: 'center'
+    textAlign: 'center',
+    color: 'grey'
   },
     justifiedText: {
     textAlign: 'justify'

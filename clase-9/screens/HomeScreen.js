@@ -90,9 +90,9 @@ export const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        padding: 10,
         justifyContent: 'center',
         alignItems:'center',
-        alignContent: 'center'
     },
     searchContainer: {
         flexDirection: 'row',
@@ -102,6 +102,8 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         paddingHorizontal: 10,
         marginBottom: 10,
+        margin: 10,
+        backgroundColor:'white',
     },
     searchBar: {
         flex: 1,
@@ -122,3 +124,5 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
 });
+
+export default HomeScreen;

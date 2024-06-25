@@ -31,16 +31,16 @@ const styles = StyleSheet.create({
     image:{
         width: '100%',
         height: 200,
-        marginBottom: 10
+        
     },
     title:{
         fontSize: 18,
         fontWeight: 'bold',
-        marginBottom: 10,
+        marginBottom: 14,
     },
     overview:{
         fontSize: 16,
-        color: 'black',
+        color: 'grey',
         marginBottom: 5
     },
     card:{

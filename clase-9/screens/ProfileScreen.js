@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, TextInput, Button } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
@@ -35,7 +35,7 @@ const ProfileScreen = () => {
          </View>
         </>
       ) : (
-        <Text>Logueate para poder ver tu info</Text>
+        <Text style={styles.texto}>Logueate para poder ver tu info</Text>
       )}
     </ScrollView>
   );
@@ -82,6 +82,11 @@ const styles = StyleSheet.create({
   boton:{
     marginTop: 100,
   },
+  texto: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'red',
+}
 });
 
 export default ProfileScreen;

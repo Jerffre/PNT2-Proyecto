@@ -51,12 +51,14 @@ const styles = StyleSheet.create({
     },
     label: {
         fontSize: 18,
-        fontWeight: 'bold',
-        marginTop: 10
+        fontWeight: '500',
+        marginTop: 10,
+        paddingBottom:5,
     },
     description: {
         fontSize: 16,
         marginBottom: 10,
+        color: 'grey',
     },
     justifiedText: {
         textAlign: 'justify'
