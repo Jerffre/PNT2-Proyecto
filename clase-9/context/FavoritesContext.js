@@ -13,37 +13,6 @@ export const FavoritesProvider = ({ children }) => {
     const [contador, setContador] = useState(0)
 
     const {userData} = useContext(AuthContext)
-    
-    // const getFavorites = async () => {
-        
-    //         try {
-    //             const userId = userData.id
-    //             const respuesta = await fetch(`${url}/favorites`);
-    //             return await respuesta.find(e => e.user_id == userId.id)
-            
-    //     } catch (error) {
-            
-    //     }
-    // }
-
-    // const addFavorite = async (movie) => {
-    //     try {
-
-    //         const favorites = getFavorites()
-    //         console.log(favorites)
-    //         const respuesta = await fetch(`https://6656578f9f970b3b36c51233.mockapi.io/api/v1/favorites/${favorites.id}`,{
-    //             method: 'PUT',
-    //             headers: {
-    //                 'Content-Type':'application/json',
-    //             },
-    //             body:{
-    //                 favorites_ids: favorites.favorites_ids.push(movie)
-    //             }
-    //         });
-    //         } catch (error) {
-                
-    //         }
-    //     }
         
     const addFavoritos2 = (item) => {
 

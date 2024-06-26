@@ -18,14 +18,6 @@ import { NotificationsProvider} from './context/NotificationsContext';
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
-// function AppTabs() { 
-//   return ( 
-//   <Tab.Navigator> 
-//     <Tab.Screen name="SideTab" component={SideTab} options={{ headerShown: false }} /> 
-//     <Tab.Screen name="HomeScreen" component={HomeScreen} /> 
-//     <Tab.Screen name="MovieFavorites" component={MoviesFavoritesScreen} /> 
-//   </Tab.Navigator> ); 
-// }
 
 function SideTab() {
   return (
@@ -41,7 +33,6 @@ function SideTab() {
 
 function AppNavigator(){
   const { status } = useContext(AuthContext)
-  // if( status === 'checking') return ()
   return (
     <Stack.Navigator
       screenOptions={{

@@ -28,7 +28,7 @@ export const MoviesFavoritesScreen = ({navigation}) => {
                 {favorites.length === 0 ? 
         <View>
 
-        <Text style={styles.texto}>Tu lista de favoritos se encuentra vacia </Text>
+        <Text style={styles.texto}>Your list is empty! </Text>
         </View>
          
          :
